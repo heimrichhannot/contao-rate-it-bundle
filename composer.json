@@ -1,5 +1,5 @@
 {
-	"name":"cgo-it/contao-rate-it-bundle",
+	"name":"heimrichhannot/contao-rate-it-bundle",
 	"description":"RateIt extension for the Contao Open Source CMS as contao 4 bundle",
 	"keywords":["contao", "rating", "rateit", "bewertung", "bundle"],
 	"type":"contao-bundle",
