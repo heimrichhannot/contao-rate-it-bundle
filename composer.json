@@ -1,5 +1,5 @@
 {
-	"name":"cgo-it/rate-it",
+	"name":"heimrichhannot/rate-it",
 	"description":"RateIt extension for the Contao Open Source CMS",
 	"keywords":["contao", "rating", "rateit", "bewertung"],
 	"type":"contao-module",
