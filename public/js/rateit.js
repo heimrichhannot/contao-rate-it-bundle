@@ -66,6 +66,7 @@ function doRateIt() {
 
 				// Wrapper-Größe so anpassen, dass alle Sterne angezeigt werden
 				el.data('wrapper').css('width', self.options.starwidth * self.options.max);
+				el.data('wrapper').css('min-width', self.options.starwidth * self.options.max);
 				el.data('wrapper').css('height', self.options.starheight);
 
 				// Breite des rateItRating-selected divs setzen
