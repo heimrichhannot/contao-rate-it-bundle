@@ -67,7 +67,7 @@ abstract class RateItHybrid extends RateItFrontend
 		$this->strTextPosition = $GLOBALS['TL_CONFIG']['rating_textposition'];
 
       $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/onReadyRateIt.js|static';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.js|static';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.min.js|static';
 		$GLOBALS['TL_CSS'][] = 'system/modules/rateit/public/css/rateit.min.css||static';
 		switch ($this->strType) {
 			case 'hearts' :

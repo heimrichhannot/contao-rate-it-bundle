@@ -42,7 +42,7 @@ class RateItNews extends RateItFrontend {
 	public function parseArticle($objTemplate, $objArticle, $caller) {
 		if (strpos(get_class($caller), "ModuleNews") !== false &&
 				$objArticle['addRating']) { 
-			   $ratingId = $objTemplate->id;
+		    $ratingId = $objTemplate->id;
 	   		$rating = $this->loadRating($ratingId, 'news');
 	   		$stars = !$rating ? 0 : $this->percentToStars($rating['rating']);
 	   		$percent = round($rating['rating'], 0)."%";
@@ -70,7 +70,7 @@ class RateItNews extends RateItFrontend {
 			}
 			
 			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/onReadyRateIt.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.min.js|static';
 	   		$GLOBALS['TL_CSS'][] = 'system/modules/rateit/public/css/rateit.min.css||static';
 			switch ($GLOBALS['TL_CONFIG']['rating_type']) {
 				case 'hearts' :

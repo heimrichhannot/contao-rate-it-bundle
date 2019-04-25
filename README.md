@@ -1,4 +1,9 @@
-## rate-it
+## Contao Rate-IT
 
-Contao Erweiterung: Rate It
+This module is a fork of [cgo-it/rate-it](https://github.com/cgoIT/contao-rate-it-bundle/tree/dev-contao3).
 
+Following change were made:
+* touch support
+* confirm button (currently only with german label)
+* partly removed mootools support
+* renamed `rateit-uncompressed.js`to `rateit.js` and former `rateit.js` to `rateit.min.js`

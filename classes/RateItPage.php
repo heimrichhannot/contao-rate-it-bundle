@@ -106,7 +106,7 @@ class RateItPage extends \Frontend {
 
 	    if (!$included) {
 	   		$strHeadTags = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo('system/modules/rateit/public/js/onReadyRateIt.js') . '"></script>' . "\n";
-	   		$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo('system/modules/rateit/public/js/rateit.js') . '"></script>' . "\n";
+	   		$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo('system/modules/rateit/public/js/rateit.min.js') . '"></script>' . "\n";
 	    }
 	   	return $strHeadTags;
 	}

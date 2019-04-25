@@ -32,6 +32,10 @@
    cursor: default;
 }
 
+.rateItRating .rateItRating-send {
+    display: inline-block;
+}
+
 div.mod_rateit_top_ratings ul {
    padding: 0;
 }

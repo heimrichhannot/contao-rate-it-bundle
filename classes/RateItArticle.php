@@ -91,7 +91,7 @@ class RateItArticle extends RateItFrontend {
 			}
 
 			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/onReadyRateIt.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.min.js|static';
 			$GLOBALS['TL_CSS'][] = 'system/modules/rateit/public/css/rateit.min.css||static';
 			switch ($GLOBALS['TL_CONFIG']['rating_type']) {
 				case 'hearts' :
@@ -149,7 +149,7 @@ class RateItArticle extends RateItFrontend {
 					}
 						
 					$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/onReadyRateIt.js|static';
-					$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.js|static';
+					$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.min.js|static';
 					$GLOBALS['TL_CSS'][] = 'system/modules/rateit/public/css/rateit.min.css||static';
 					switch ($GLOBALS['TL_CONFIG']['rating_type']) {
 						case 'hearts' :
@@ -233,7 +233,7 @@ class RateItArticle extends RateItFrontend {
 			$objTemplate->arrRating = $arrRating;
 
 			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/onReadyRateIt.js|static';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.js|static';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/rateit/public/js/rateit.min.js|static';
 			$GLOBALS['TL_CSS'][] = 'system/modules/rateit/public/css/rateit.min.css||static';
 			switch ($GLOBALS['TL_CONFIG']['rating_type']) {
 				case 'hearts' :
