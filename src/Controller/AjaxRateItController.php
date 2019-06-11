@@ -8,20 +8,20 @@
 
 namespace cgoIT\rateit\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use cgoIT\rateit\RateIt;
 
-class AjaxRateItController extends Controller {
+class AjaxRateItController extends Controller
+{
     /**
      * Handles rating requests.
      *
-     * @return JsonResponse
-     *
      * @Route("/rateit", name="ajax_rateit", defaults={"_scope" = "frontend", "_token_check" = false})
      */
-    public function ajaxAction() {
+    public function ajaxAction()
+    {
 
         $this->container->get('contao.framework')->initialize();
 
