@@ -62,6 +62,6 @@
         "src/Resources/contao/runonce/create-initial-data.php"
       ]
     },
-    "contao-manager-plugin": "HeimrichHannot\\RateItBundle\\ContaoManagerPlugin"
+    "contao-manager-plugin": "HeimrichHannot\\RateItBundle\\ContaoManager\\Plugin"
   }
 }
