@@ -1,39 +1,11 @@
 <?php
 
-/**
- * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
- *
- * Formerly known as TYPOlight Open Source CMS.
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 3 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at <http://www.gnu.org/licenses/>.
- *
- * PHP version 5
- * @copyright  cgo IT, 2013
- * @author     Carsten Götzinger (info@cgo-it.de)
- * @package    rateit
- * @license    GNU/LGPL
- * @filesource
- */
-
-namespace cgoIT\rateit;
+namespace HeimrichHannot\RateItBundle;
 
 class RateItBackendModule extends \BackendModule
 {
 	protected $strTemplate;
-	protected $actions = array();
+	protected $actions = [];
 
 	protected $rateit;
 
@@ -60,20 +32,20 @@ class RateItBackendModule extends \BackendModule
 	/**
 	 * Initialize the controller
 	 */
-	public function __construct($objElement=array()) {
+	public function __construct($objElement= []) {
 		parent::__construct($objElement);
 
 		$this->label = $GLOBALS['TL_CONFIG']['rating_type'] == 'hearts' ? $GLOBALS['TL_LANG']['rateit']['heart'] : $GLOBALS['TL_LANG']['rateit']['star'];
 		$this->labels = $GLOBALS['TL_CONFIG']['rating_type'] == 'hearts' ? $GLOBALS['TL_LANG']['rateit']['hearts'] : $GLOBALS['TL_LANG']['rateit']['stars'];
 
-		$this->actions = array(
+		$this->actions = [
 				//	  act[0]			strTemplate					compiler
-				array('',				'rateitbe_ratinglist',		'listRatings' ),
-				array('reset_ratings',	'',							'resetRatings' ),
-				array('view',			'rateitbe_ratingview',		'viewRating' ),
-				array('export',			'',							'exportRatings' ),
-				array('exportDetails',	'',							'exportRatingDetails' ),
-		);
+				['',				'rateitbe_ratinglist',		'listRatings'],
+				['reset_ratings',	'',							'resetRatings'],
+				['view',			'rateitbe_ratingview',		'viewRating'],
+				['export',			'',							'exportRatings'],
+				['exportDetails',	'',							'exportRatingDetails'],
+        ];
 
 		$this->loadLanguageFile('rateit_backend');
 		$this->arrExportHeader = &$GLOBALS['TL_LANG']['tl_rateit']['xls_headers'];
@@ -113,7 +85,7 @@ class RateItBackendModule extends \BackendModule
 			$this->intStars = $stars;
 		}
 
-		return str_replace(array('{{', '}}'), array('[{]', '[}]'), parent::generate());
+		return str_replace(['{{', '}}'], ['[{]', '[}]'], parent::generate());
 	} // generate
 
 	/**
@@ -132,7 +104,7 @@ class RateItBackendModule extends \BackendModule
 
 		// complete rateit initialization
 		$rateit             = &$this->rateit;
-		$rateit->f_link	    = $this->createUrl(array($this->action => $this->parameter));
+		$rateit->f_link	    = $this->createUrl([$this->action => $this->parameter]);
 		$rateit->f_action	= $this->compiler;
 		$rateit->f_mode	    = $this->action;
 		$rateit->theme		= new RateItBackend();
@@ -161,12 +133,12 @@ class RateItBackendModule extends \BackendModule
 			$rateit->f_find	    = trim(\Input::post('rateit_find'));
 			$this->Session->set(
 					'rateit_settings',
-					array(
+					[
 							'rateit_typ'	  => $rateit->f_typ,
 							'rateit_order'	  => $rateit->f_order,
 							'rateit_page'	  => $rateit->f_page,
 							'rateit_find'	  => $rateit->f_find
-					)
+                    ]
 			);
 		} else {
 			$stg = $this->Session->get('rateit_settings');
@@ -201,7 +173,7 @@ class RateItBackendModule extends \BackendModule
 			default			 : $options['order'] = 'rating desc';
 		} // switch
 
-		$rateit->exportLink = $this->createUrl(array('act' => 'export'));
+		$rateit->exportLink = $this->createUrl(['act' => 'export']);
 
 		// query extensions
 		$rateit->ratingitems = $this->getRatingItems($options);
@@ -213,12 +185,12 @@ class RateItBackendModule extends \BackendModule
 
 		// add view links
 		foreach ($rateit->ratingitems as &$ext) {
-			$ext->viewLink = $this->createUrl(array('act' => 'view', 'rkey' => $ext->rkey, 'typ' => $ext->typ));
+			$ext->viewLink = $this->createUrl(['act' => 'view', 'rkey' => $ext->rkey, 'typ' => $ext->typ]);
 			$totrecs = $ext->totcount;
 		} // foreach
 
 		// create pages list
-		$rateit->pages = array();
+		$rateit->pages = [];
 		if ($perpage > 0) {
 			$first = 1;
 			while ($totrecs > 0) {
@@ -254,7 +226,7 @@ class RateItBackendModule extends \BackendModule
 
 		// Header setzen
 		foreach(array_values($this->arrExportHeader) as $header) {
-			$xls->setcell(array("sheetname" => $strXlsSheet,"row" => $intRowCounter, "col" => $intColCounter, "data" => $header, "fontweight" => XLSFONT_BOLD, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL));
+			$xls->setcell(["sheetname" => $strXlsSheet, "row" => $intRowCounter, "col" => $intColCounter, "data" => $header, "fontweight" => XLSFONT_BOLD, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL]);
 			$xls->setcolwidth($strXlsSheet, $intColCounter, 0x1aff);
 			$intColCounter++;
 		}
@@ -269,7 +241,7 @@ class RateItBackendModule extends \BackendModule
 			foreach(array_keys($this->arrExportHeader) as $key) {
 				$strVal = $arrItem[$key];
 				$strVal = $this->StringUtil->decodeEntities($strVal);
-				$strVal = preg_replace(array('/<br.*\/*>/si'), array("\n"), $strVal);
+				$strVal = preg_replace(['/<br.*\/*>/si'], ["\n"], $strVal);
 				$strVal = $this->convertEncoding($strVal, $GLOBALS['TL_CONFIG']['characterSet'], 'CP1252');
 
 				$cellType = CELL_STRING;
@@ -296,7 +268,7 @@ class RateItBackendModule extends \BackendModule
 						$cellType = CELL_FLOAT;
 						break;
 				}
-				$xls->setcell(array("sheetname" => $strXlsSheet,"row" => $intRowCounter, "col" => $intColCounter, "data" => $strVal, "type" => $cellType, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL));
+				$xls->setcell(["sheetname" => $strXlsSheet, "row" => $intRowCounter, "col" => $intColCounter, "data" => $strVal, "type" => $cellType, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL]);
 				$intColCounter++;
 			}
 
@@ -323,9 +295,9 @@ class RateItBackendModule extends \BackendModule
 			$rateit->f_page	    = trim(\Input::post('rateit_details_page'));
 			$this->Session->set(
 					'rateit_settings',
-					array(
+					[
 							'rateit_details_page'	  => $rateit->f_page
-					)
+                    ]
 			);
 		} else {
 			$stg = $this->Session->get('rateit_settings');
@@ -356,12 +328,12 @@ class RateItBackendModule extends \BackendModule
 		$typ = \Input::get('typ');
 
 		// compose base options
-		$options = array(
+		$options = [
 				'rkey' 	=> $rkey,
 				'typ' 	=> $typ
-		);
+        ];
 
-		$this->rateit->f_link = $this->createUrl(array('act' => 'view', 'rkey' => $rkey, 'typ' => $typ));
+		$this->rateit->f_link = $this->createUrl(['act' => 'view', 'rkey' => $rkey, 'typ' => $typ]);
 
 		if (isset($GLOBALS['TL_CONFIG']['rating_listsize']))
 			$perpage = (int)trim($GLOBALS['TL_CONFIG']['rating_listsize']);
@@ -390,7 +362,7 @@ class RateItBackendModule extends \BackendModule
 		}
 
 		// create pages list
-		$rateit->pages = array();
+		$rateit->pages = [];
 		if ($perpage > 0) {
 			$first = 1;
 			while ($totrecs > 0) {
@@ -401,7 +373,7 @@ class RateItBackendModule extends \BackendModule
 			} // while
 		} // if
 
-		$rateit->exportLink = $this->createUrl(array('act' => 'exportDetails', 'rkey' => $rkey, 'typ' => $typ));
+		$rateit->exportLink = $this->createUrl(['act' => 'exportDetails', 'rkey' => $rkey, 'typ' => $typ]);
 
 		$ext->statistics = $this->getRatingStatistics($ext->item_id);
 		$ext->ratingsChartData = $this->getRatingsChartData($ext->statistics);
@@ -441,13 +413,13 @@ class RateItBackendModule extends \BackendModule
 			$this->redirect($rateit->backLink);
 		$typ = \Input::get('typ');
 
-		$this->rateit->backLink = $this->createUrl(array('act' => 'view', 'rkey' => $rkey, 'typ' => $typ));
+		$this->rateit->backLink = $this->createUrl(['act' => 'view', 'rkey' => $rkey, 'typ' => $typ]);
 
 		// compose base options
-		$options = array(
+		$options = [
 				'rkey' 	=> $rkey,
 				'typ' 	=> $typ
-		);
+        ];
 
 		$this->import('StringUtil');
 		$rateit = &$this->Template->rateit;
@@ -470,7 +442,7 @@ class RateItBackendModule extends \BackendModule
 
 		// Header setzen
 		foreach(array_values($this->arrExportHeaderDetails) as $header) {
-			$xls->setcell(array("sheetname" => $strXlsSheet,"row" => $intRowCounter, "col" => $intColCounter, "data" => $header, "fontweight" => XLSFONT_BOLD, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL));
+			$xls->setcell(["sheetname" => $strXlsSheet, "row" => $intRowCounter, "col" => $intColCounter, "data" => $header, "fontweight" => XLSFONT_BOLD, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL]);
 			$xls->setcolwidth($strXlsSheet, $intColCounter, 0x1aff);
 			$intColCounter++;
 		}
@@ -485,7 +457,7 @@ class RateItBackendModule extends \BackendModule
 			foreach(array_keys($this->arrExportHeaderDetails) as $key) {
 				$strVal = $arrItem[$key];
 				$strVal = $this->StringUtil->decodeEntities($strVal);
-				$strVal = preg_replace(array('/<br.*\/*>/si'), array("\n"), $strVal);
+				$strVal = preg_replace(['/<br.*\/*>/si'], ["\n"], $strVal);
 				$strVal = $this->convertEncoding($strVal, $GLOBALS['TL_CONFIG']['characterSet'], 'CP1252');
 
 				$cellType = CELL_STRING;
@@ -506,7 +478,7 @@ class RateItBackendModule extends \BackendModule
 						$cellType = CELL_FLOAT;
 						break;
 				}
-				$xls->setcell(array("sheetname" => $strXlsSheet,"row" => $intRowCounter, "col" => $intColCounter, "data" => $strVal, "type" => $cellType, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL));
+				$xls->setcell(["sheetname" => $strXlsSheet, "row" => $intRowCounter, "col" => $intColCounter, "data" => $strVal, "type" => $cellType, "vallign" => XLSXF_VALLIGN_TOP, "fontfamily" => XLSFONT_FAMILY_NORMAL]);
 				$intColCounter++;
 			}
 
@@ -636,7 +608,7 @@ class RateItBackendModule extends \BackendModule
 		$count = $this->Database->query($cntSql)->fetchRow();
 
 		$arrRatingItems = $this->Database->query($sql)->fetchAllAssoc();
-		$arrReturn = array();
+		$arrReturn = [];
 		foreach ($arrRatingItems as $rating) {
 			if ($rating['active'] != '1') $rating['active'] = '0';
 			$rating['percent'] = $rating['rating'];
@@ -648,7 +620,7 @@ class RateItBackendModule extends \BackendModule
 		return $arrReturn;
 	} // getRatingItems
 
-	protected function getRatings($ext, $options = array()) {
+	protected function getRatings($ext, $options = []) {
 		// Gesamtanzahl (für Paging wichtig) ermitteln
 		$cntSql = "SELECT COUNT(*) FROM tl_rateit_ratings r WHERE r.pid=$ext->item_id";
 		$count = $this->Database->prepare($cntSql)
@@ -677,7 +649,7 @@ class RateItBackendModule extends \BackendModule
 		$arrRatings = $this->Database->prepare($sql)
 		->execute()
 		->fetchAllAssoc();
-		$arrReturn = array();
+		$arrReturn = [];
 		foreach ($arrRatings as $rating) {
 			$rating['percent'] = $rating['rating'];
 			$rating['rating'] = $this->percentToStars($rating['percent']);
@@ -705,7 +677,7 @@ class RateItBackendModule extends \BackendModule
 		$arrRatingStatistics = $this->Database->prepare($sql)
 		->execute()
 		->fetchAllAssoc();
-		$arrReturn = array();
+		$arrReturn = [];
 		foreach ($arrRatingStatistics as $rating) {
 			$rating['percent'] = $rating['rating'];
 			$rating['rating'] = $this->percentToStars($rating['percent']);
@@ -715,17 +687,17 @@ class RateItBackendModule extends \BackendModule
 	} // getRatings
 
 	protected function getRatingsChartData($statistics) {
-		$arr = array();
-		$arr['cols'] = array();
-		$arr['rows'] = array();
+		$arr = [];
+		$arr['cols'] = [];
+		$arr['rows'] = [];
 
 		// Spalten anlegen
-		$arr['cols'][] = array('id'=>'rating', 'label'=>$GLOBALS['TL_LANG']['tl_rateit']['rating_chart_legend'][2], 'type'=>'string');
-		$arr['cols'][] = array('id'=>'count', 'label'=>$GLOBALS['TL_LANG']['tl_rateit']['rating_chart_legend'][3], 'type'=>'number');
+		$arr['cols'][] = ['id' =>'rating', 'label' =>$GLOBALS['TL_LANG']['tl_rateit']['rating_chart_legend'][2], 'type' =>'string'];
+		$arr['cols'][] = ['id' =>'count', 'label' =>$GLOBALS['TL_LANG']['tl_rateit']['rating_chart_legend'][3], 'type' =>'number'];
 
 		// Zeilen anlegen
 		foreach($statistics as $obj) {
-			$arr['rows'][] = array('c'=>array(array('v'=>$obj->rating.' '.($obj->rating == 1 ? $this->label : $this->labels)), array('v'=>(int)$obj->count, 'f'=>$obj->count.' '.$GLOBALS['TL_LANG']['tl_rateit']['vote'][$obj->count == 1 ? 0 : 1])));
+			$arr['rows'][] = ['c' => [['v' =>$obj->rating.' '.($obj->rating == 1 ? $this->label : $this->labels)], ['v' =>(int)$obj->count, 'f' =>$obj->count.' '.$GLOBALS['TL_LANG']['tl_rateit']['vote'][$obj->count == 1 ? 0 : 1]]]];
 		}
 		return json_encode($arr);
 	}
@@ -747,22 +719,26 @@ class RateItBackendModule extends \BackendModule
 
 		$this->loadLanguageFile('default');
 
-		$arr = array();
-		$arr['cols'] = array();
-		$arr['rows'] = array();
+		$arr = [];
+		$arr['cols'] = [];
+		$arr['rows'] = [];
 
 		// Spalten anlegen
-		$arr['cols'][] = array('id'=>'month', 'label'=>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][3], 'type'=>'string');
-		$arr['cols'][] = array('id'=>'count', 'label'=>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][4], 'type'=>'number');
-		$arr['cols'][] = array('id'=>'avg', 'label'=>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][2], 'type'=>'number');
+		$arr['cols'][] = ['id' =>'month', 'label' =>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][3], 'type' =>'string'];
+		$arr['cols'][] = ['id' =>'count', 'label' =>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][4], 'type' =>'number'];
+		$arr['cols'][] = ['id' =>'avg', 'label' =>$GLOBALS['TL_LANG']['tl_rateit']['month_chart_legend'][2], 'type' =>'number'];
 
 		// Zeilen anlegen
 		foreach($arrResult as $result) {
 			$month = $GLOBALS['TL_LANG']['MONTHS'][$result['monat']-1].' '.$result['jahr'];
 			$avgValue = round((float)(($result['bewertung']*$this->intStars)/100), 1);
-			$arr['rows'][] = array('c'=>array(array('v'=>$month),
-					array('v'=>(int)$result['anzahl']),
-					array('v'=>$avgValue)));
+			$arr['rows'][] = [
+                'c' => [
+                    ['v' =>$month],
+					['v' =>(int)$result['anzahl']],
+					['v' =>$avgValue]
+                ]
+            ];
 		}
 		return json_encode($arr);
 	}

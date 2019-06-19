@@ -567,14 +567,14 @@ function doRateIt() {
 		jQuery(document).ready(function() {
 			jQuery.ajax({
 				  type: "GET",
-				  url: "bundles/cgoitrateit/js/jquery-ui-effects.custom.min.js",
+				  url: "bundles/contaorateit/js/jquery-ui-effects.custom.min.js",
 				  dataType: "script",
 				  async: false,
 				  cache: true
 			});
 			jQuery.ajax({
 				  type: "GET",
-				  url: "bundles/cgoitrateit/js/helper.min.js",
+				  url: "bundles/contaorateit/js/helper.min.js",
 				  dataType: "script",
 				  async: false,
 				  cache: true

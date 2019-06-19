@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: darko
- * Date: 23.10.17
- * Time: 23:55
- */
 
-namespace cgoIT\rateit\Controller;
+namespace HeimrichHannot\RateItBundle\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use cgoIT\rateit\RateIt;
+use HeimrichHannot\RateItBundle\RateIt;
 
 class AjaxRateItController extends Controller
 {
