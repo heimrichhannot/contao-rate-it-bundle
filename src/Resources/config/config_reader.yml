@@ -1,0 +1,4 @@
+huh:
+  reader:
+    items:
+      - { name: news_rate_it, class: HeimrichHannot\RateItBundle\Item\DefaultReaderItem }

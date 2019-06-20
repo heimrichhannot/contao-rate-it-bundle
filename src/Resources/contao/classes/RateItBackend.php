@@ -33,7 +33,7 @@ class RateItBackend
      */
     public static function image($file)
     {
-        $url = self::path . 'images/';
+        $url = 'web/' . self::path . 'images/';
         if (is_file(TL_ROOT . '/' . $url . $file . '.png')) {
             return $url . $file . '.png';
         }
@@ -57,6 +57,7 @@ class RateItBackend
         }
         $img  = self::image($file);
         $size = getimagesize(TL_ROOT . '/' . $img);
+        $img = preg_replace('@^web/@i', '', $img);
         return '<img' . ((substr($img, -4) == '.png') ? ' class="pngfix"' : '') . ' src="' . $img . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
     } // createImage
 

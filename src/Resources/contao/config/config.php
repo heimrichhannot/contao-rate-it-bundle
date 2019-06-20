@@ -15,9 +15,9 @@ array_insert($GLOBALS['BE_MOD']['content'], -1,
     [
         'rateit' => [
             'callback'   => 'HeimrichHannot\RateItBundle\RateItBackendModule',
-            'icon'       => \HeimrichHannot\RateItBundle\RateItBackend::image('icon'),
-            'stylesheet' => \HeimrichHannot\RateItBundle\RateItBackend::css('backend'),
-            'javascript' => \HeimrichHannot\RateItBundle\RateItBackend::js('RateItBackend')
+            'icon'       => 'bundles/contaorateit/images/icon.gif',
+            'stylesheet' => 'bundles/contaorateit/css/backend.css',
+            'javascript' => 'bundles/contaorateit/js/RateItBackend.js',
         ]
     ]);
 
