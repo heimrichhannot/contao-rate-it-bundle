@@ -72,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['rating_template'] =
         'default'          => 'rateit_default',
         'exclude'          => true,
         'inputType'        => 'select',
-        'options_callback' => ['tl_settings_rateit', 'getRateItTemplates'],
+        'options_callback' => [\HeimrichHannot\RateItBundle\DcaHelper::class, 'getRateItTemplates'],
         'eval'             => ['mandatory' => true, 'tl_class' => 'w50']
     ];
 
