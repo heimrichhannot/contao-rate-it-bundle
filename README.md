@@ -1,3 +1,3 @@
-## rate-it
+## Rate it Bundle
 
-This bundle were forked to fix some problems on the [contao 3 branch](https://github.com/heimrichhannot/contao-rate-it-bundle/tree/dev-contao3). Look there for changes.
+This bundle is a fork of [cgoIT/contao-rate-it-bundle](https://github.com/cgoIT/contao-rate-it-bundle) and add support for reader bundle and adjustments to newer contao and symfony versions.

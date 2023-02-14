@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace HeimrichHannot\RateItBundle\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use HeimrichHannot\RateItBundle\RateIt;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-class AjaxRateItController extends Controller
+class AjaxRateItController extends AbstractController
 {
     /**
      * Handles rating requests.
@@ -16,7 +22,6 @@ class AjaxRateItController extends Controller
      */
     public function ajaxAction()
     {
-
         $this->container->get('contao.framework')->initialize();
 
         $controller = new RateIt();
@@ -26,5 +31,4 @@ class AjaxRateItController extends Controller
 
         return new Response(null);
     }
-
 }

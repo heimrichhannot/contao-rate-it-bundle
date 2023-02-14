@@ -10,7 +10,7 @@
   ],
   "type": "contao-bundle",
   "homepage": "https://cgo-it.de",
-  "license": "LGPL-3.0+",
+  "license": "LGPL-3.0-or-later",
   "prefer-stable": true,
   "config": {
     "preferred-install": {
@@ -24,6 +24,11 @@
       "email": "info@cgo-it.de",
       "homepage": "https://cgo-it.de",
       "role": "Developer"
+    },
+    {
+      "name": "Heimrich & Hannot GmbH",
+      "homepage": "https://heimrich-hannot.de",
+      "role": "Developer"
     }
   ],
   "support": {
@@ -31,10 +36,11 @@
     "source": "https://github.com/heimrichhannot/contao-rate-it-bundle.git"
   },
   "require": {
-    "php": ">=7.0",
-    "contao/core-bundle": "^4.4",
+    "php": "^7.4 || ^8.0",
+    "contao/core-bundle": "^4.9",
     "cgo-it/contao-xls_export-bundle": "^4.0",
-    "heimrichhannot/contao-utils-bundle": "^2.99"
+    "heimrichhannot/contao-utils-bundle": "^2.99",
+    "symfony/framework-bundle": "^4.4 || ^5.4"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0"

@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace HeimrichHannot\RateItBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
-use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
+use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ContainerBuilder;
 use Contao\ManagerPlugin\Config\ExtensionPluginInterface;
@@ -19,7 +25,7 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface, Extension
     /**
      * {@inheritdoc}
      */
-    public function getBundles(ParserInterface $parser)
+    public function getBundles(ParserInterface $parser): array
     {
         return [
             BundleConfig::create(ContaoRateItBundle::class)
@@ -38,7 +44,7 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface, Extension
             ->load(__DIR__.'/../Resources/config/routing.yml');
     }
 
-    public function getExtensionConfig($extensionName, array $extensionConfigs, ContainerBuilder $container)
+    public function getExtensionConfig($extensionName, array $extensionConfigs, ContainerBuilder $container): array
     {
         $extensionConfigs = ContainerUtil::mergeConfigFile(
             'huh_list',
