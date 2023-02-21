@@ -15,6 +15,7 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Config\ContainerBuilder;
 use Contao\ManagerPlugin\Config\ExtensionPluginInterface;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
+use Contao\NewsBundle\ContaoNewsBundle;
 use HeimrichHannot\RateItBundle\ContaoRateItBundle;
 use HeimrichHannot\UtilsBundle\Container\ContainerUtil;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
@@ -27,9 +28,17 @@ class Plugin implements BundlePluginInterface, RoutingPluginInterface, Extension
      */
     public function getBundles(ParserInterface $parser): array
     {
+        $loadAfter = [
+            ContaoCoreBundle::class,
+        ];
+
+        if (class_exists(ContaoNewsBundle::class)) {
+            $loadAfter[] = ContaoNewsBundle::class;
+        }
+
         return [
             BundleConfig::create(ContaoRateItBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+                ->setLoadAfter($loadAfter)
                 ->setReplace(['rate-it']),
         ];
     }
