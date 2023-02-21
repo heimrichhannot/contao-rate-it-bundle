@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_news']['fields']['rateit_position'] =
         'eval' => ['mandatory' => true, 'tl_class' => 'w50'],
     ];
 
-class tl_news extends \HeimrichHannot\RateItBundle\DcaHelper
+class tl_news_rating extends \HeimrichHannot\RateItBundle\DcaHelper
 {
     /**
      * Constructor.

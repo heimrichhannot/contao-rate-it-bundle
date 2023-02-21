@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rateit_template'] =
 /**
  * Class tl_module_rateit.
  */
-class tl_module extends \HeimrichHannot\RateItBundle\DcaHelper
+class tl_module_rateit extends \HeimrichHannot\RateItBundle\DcaHelper
 {
     /**
      * Constructor.

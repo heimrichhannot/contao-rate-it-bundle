@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
+ *
+ * @license LGPL-3.0-or-later
+ */
+
 namespace HeimrichHannot\RateItBundle\Item;
 
 use HeimrichHannot\RateItBundle\RateItFrontend;
@@ -8,7 +14,7 @@ trait NewsRateItItemTrait
 {
     public function getStars()
     {
-        return intval($GLOBALS['TL_CONFIG']['rating_count']) ?: 5;
+        return (int) ($GLOBALS['TL_CONFIG']['rating_count']) ?: 5;
     }
 
     public function getTextPosition()
@@ -20,12 +26,14 @@ trait NewsRateItItemTrait
     {
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaorateit/js/onReadyRateIt.js|static';
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaorateit/js/rateit.js|static';
-        $GLOBALS['TL_CSS'][]        = 'bundles/contaorateit/css/rateit.min.css||static';
+        $GLOBALS['TL_CSS'][] = 'bundles/contaorateit/css/rateit.min.css||static';
 
         switch ($GLOBALS['TL_CONFIG']['rating_type']) {
-            case 'hearts' :
+            case 'hearts':
                 $GLOBALS['TL_CSS'][] = 'bundles/contaorateit/css/heart.min.css||static';
+
                 break;
+
             default:
                 $GLOBALS['TL_CSS'][] = 'bundles/contaorateit/css/star.min.css||static';
         }
@@ -33,15 +41,15 @@ trait NewsRateItItemTrait
         $ratingId = $this->id;
 
         $frontend = new RateItFrontend();
-        $rating   = $frontend->loadRating($ratingId, 'news');
-        $stars    = !$rating ? 0 : $frontend->percentToStars($rating['rating']);
+        $rating = $frontend->loadRating($ratingId, 'news');
+        $stars = !$rating ? 0 : $frontend->percentToStars($rating['rating']);
 
-        return 'rateItRating-' . $ratingId . '-news-' . $stars . '_' . $this->getStars();
+        return 'rateItRating-'.$ratingId.'-news-'.$stars.'_'.$this->getStars();
     }
 
     public function getDescriptionId()
     {
-        return 'rateItRating-' . $this->id . '-description';
+        return 'rateItRating-'.$this->id.'-description';
     }
 
     public function getDescription()
@@ -49,7 +57,7 @@ trait NewsRateItItemTrait
         $ratingId = $this->id;
 
         $frontend = new RateItFrontend();
-        $rating   = $frontend->loadRating($ratingId, 'news');
+        $rating = $frontend->loadRating($ratingId, 'news');
 
         return $frontend->getStarMessage($rating);
     }
@@ -64,7 +72,7 @@ trait NewsRateItItemTrait
         $ratingId = $this->id;
 
         $frontend = new RateItFrontend();
-        $rating   = $frontend->loadRating($ratingId, 'news');
+        $rating = $frontend->loadRating($ratingId, 'news');
 
         return $rating['title'];
     }
@@ -74,7 +82,7 @@ trait NewsRateItItemTrait
         $ratingId = $this->id;
 
         $frontend = new RateItFrontend();
-        $rating   = $frontend->loadRating($ratingId, 'news');
+        $rating = $frontend->loadRating($ratingId, 'news');
 
         return $frontend->percentToStars($rating['rating']);
     }
@@ -89,28 +97,28 @@ trait NewsRateItItemTrait
         $ratingId = $this->id;
 
         $frontend = new RateItFrontend();
-        $rating   = $frontend->loadRating($ratingId, 'news');
+        $rating = $frontend->loadRating($ratingId, 'news');
 
         return $rating['totalRating'];
     }
 
     public function getShowBefore()
     {
-        return $this->getTextPosition() === 'before';
+        return 'before' === $this->getTextPosition();
     }
 
     public function getShowAfter()
     {
-        return $this->getTextPosition() === 'after';
+        return 'after' === $this->getTextPosition();
     }
 
     public function getRatingBefore()
     {
-        return $this->rateit_position === 'before';
+        return 'before' === $this->rateit_position;
     }
 
     public function getRatingAfter()
     {
-        return $this->rateit_position === 'after';
+        return 'after' === $this->rateit_position;
     }
 }
