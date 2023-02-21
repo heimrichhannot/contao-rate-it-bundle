@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.7] - 2023-02-21
+- Fixed: exceptions
+
 ## [4.0.6] - 2023-02-21
 - Fixed: exception on cache warmup
 
