@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.6] - 2023-02-21
+- Fixed: exception on cache warmup
+
 ## [4.0.5] - 2023-02-21
 - Fixed: array index issues with php 8
 
