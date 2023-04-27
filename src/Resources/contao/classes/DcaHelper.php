@@ -2,10 +2,14 @@
 
 namespace HeimrichHannot\RateItBundle;
 
+use Contao\Backend;
+use Contao\DataContainer;
+use Contao\DC_Table;
+
 /**
  * Class DcaHelper
  */
-class DcaHelper extends \Backend
+class DcaHelper extends Backend
 {
 
 	/**
@@ -20,16 +24,9 @@ class DcaHelper extends \Backend
 	 * @param DataContainer
 	 * @return array
 	 */
-	public function getRateItTemplates(\DataContainer $dc)
+	public function getRateItTemplates(DataContainer $dc)
 	{
-		$intPid = $dc->activeRecord->pid;
-
-		if ($this->Input->get('act') == 'overrideAll')
-		{
-			$intPid = $this->Input->get('id');
-		}
-
-		return $this->getTemplateGroup('rateit_', $intPid);
+        return Backend::getTemplateGroup('rateit_');
 	}
 
 	/**
@@ -38,7 +35,7 @@ class DcaHelper extends \Backend
 	 * @param object
 	 * @return string
 	 */
-	public function insertOrUpdateRatingKey(\DC_Table $dc, $type, $ratingTitle) {
+	public function insertOrUpdateRatingKey(DC_Table $dc, $type, $ratingTitle) {
 		if ($dc->activeRecord->rateit_active || $dc->activeRecord->addRating) {
 			$actRecord = $this->Database->prepare("SELECT * FROM tl_rateit_items WHERE rkey=? and typ=?")
 							->execute($dc->activeRecord->id, $type)
@@ -76,7 +73,7 @@ class DcaHelper extends \Backend
 	 * @param object
 	 * @return string
 	 */
-	public function deleteRatingKey(\DC_Table $dc, $type)
+	public function deleteRatingKey(DC_Table $dc, $type)
 	{
 		$this->Database->prepare("DELETE FROM tl_rateit_items WHERE rkey=? and typ=?")
 		               ->execute($dc->activeRecord->id, $type);
