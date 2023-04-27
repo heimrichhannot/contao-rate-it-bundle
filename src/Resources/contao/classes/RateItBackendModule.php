@@ -2,7 +2,12 @@
 
 namespace HeimrichHannot\RateItBundle;
 
-class RateItBackendModule extends \BackendModule
+use Contao\BackendModule;
+use Contao\BackendUser;
+use Contao\Controller;
+use Contao\Input;
+
+class RateItBackendModule extends BackendModule
 {
 	protected $strTemplate;
 	protected $actions = [];
@@ -39,7 +44,7 @@ class RateItBackendModule extends \BackendModule
 		$this->labels = $GLOBALS['TL_CONFIG']['rating_type'] == 'hearts' ? $GLOBALS['TL_LANG']['rateit']['hearts'] : $GLOBALS['TL_LANG']['rateit']['stars'];
 
 		$this->actions = [
-				//	  act[0]			strTemplate					compiler
+				//	act[0]			strTemplate					compiler
 				['',				'rateitbe_ratinglist',		'listRatings'],
 				['reset_ratings',	'',							'resetRatings'],
 				['view',			'rateitbe_ratingview',		'viewRating'],
@@ -60,16 +65,18 @@ class RateItBackendModule extends \BackendModule
 	 */
 	public function generate()
 	{
+        $user = BackendUser::getInstance();
 		$this->rateit = new \stdClass();
 		$rateit = &$this->rateit;
-		$rateit->username	= $this->BackendUser->username;
-		$rateit->isadmin	= $this->BackendUser->isAdmin;
+		$rateit->username	= $user->getUsername();
+		$rateit->isadmin	= $user->isAdmin;
+        $rateit->f_type		= '';
 
 		$this->strTemplate  = $this->actions[0][1];
 		$this->compiler	    = $this->actions[0][2];
 
-		$act = \Input::get('act');
-		if (!$act) $act = \Input::post('act');
+		$act = Input::get('act');
+		if (!$act) $act = Input::post('act');
 		foreach ($this->actions as $action) {
 			if ($act == $action[0]) {
 				$this->parameter   = $act;
@@ -84,6 +91,8 @@ class RateItBackendModule extends \BackendModule
 		if ($stars > 0) {
 			$this->intStars = $stars;
 		}
+
+        Controller::loadLanguageFile('tl_rateit');
 
 		return str_replace(['{{', '}}'], ['[{]', '[}]'], parent::generate());
 	} // generate
@@ -126,11 +135,11 @@ class RateItBackendModule extends \BackendModule
 		// returning from submit?
 		if ($this->filterPost('rateit_action') == $rateit->f_action) {
 			// get url parameters
-			$rateit->f_typ 		= trim(\Input::post('rateit_typ'));
-			$rateit->f_active	= trim(\Input::post('rateit_active'));
-			$rateit->f_order	= trim(\Input::post('rateit_order'));
-			$rateit->f_page	    = trim(\Input::post('rateit_page'));
-			$rateit->f_find	    = trim(\Input::post('rateit_find'));
+			$rateit->f_typ 		= trim(Input::post('rateit_typ'));
+			$rateit->f_active	= trim(Input::post('rateit_active'));
+			$rateit->f_order	= trim(Input::post('rateit_order'));
+			$rateit->f_page	    = trim(Input::post('rateit_page'));
+			$rateit->f_find	    = trim(Input::post('rateit_find'));
 			$this->Session->set(
 					'rateit_settings',
 					[
@@ -144,7 +153,7 @@ class RateItBackendModule extends \BackendModule
 			$stg = $this->Session->get('rateit_settings');
 			if (is_array($stg)) {
 				$rateit->f_typ	 	= trim($stg['rateit_typ']);
-				$rateit->f_active	= trim($stg['rateit_active']);
+				$rateit->f_active	= trim($stg['rateit_active'] ?? '');
 				$rateit->f_order	= trim($stg['rateit_order']);
 				$rateit->f_page	    = trim($stg['rateit_page']);
 				$rateit->f_find	    = trim($stg['rateit_find']);
@@ -302,7 +311,7 @@ class RateItBackendModule extends \BackendModule
 		} else {
 			$stg = $this->Session->get('rateit_settings');
 			if (is_array($stg)) {
-				$rateit->f_page	    = trim($stg['rateit_details_page']);
+				$rateit->f_page	    = trim($stg['rateit_details_page'] ?? '');
 			} // if
 		} // if
 
@@ -391,7 +400,7 @@ class RateItBackendModule extends \BackendModule
 		}
 
 		foreach ($ids0 as $id) {
-			list($rkey, $typ) = explode('__', $id);
+			[$rkey, $typ] = explode('__', $id);
 			$pid = $this->Database->prepare('SELECT id FROM tl_rateit_items WHERE rkey=? and typ=?')
 						  ->execute($rkey, $typ)
 						  ->fetchRow();
@@ -635,6 +644,7 @@ class RateItBackendModule extends \BackendModule
 			}
 		}
 
+        $limit = '';
 		if (isset($cntRows) && isset($first)) {
 			$limit = "LIMIT $first, $cntRows";
 		}

@@ -178,6 +178,10 @@
         <source>Reset selected ratings</source>
         <target>Reset selected ratings</target>
       </trans-unit>
+      <trans-unit id="tl_rateit.apply">
+        <source>Apply</source>
+        <target>Apply</target>
+      </trans-unit>
       <trans-unit id="tl_rateit_type_options.page">
         <source>Page</source>
         <target>Page</target>

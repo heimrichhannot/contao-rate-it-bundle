@@ -174,9 +174,21 @@
         <source>votes</source>
         <target>Stimmen</target>
       </trans-unit>
+      <trans-unit id="tl_rateit.rateit.0">
+        <source>rateit</source>
+        <target>rateit</target>
+      </trans-unit>
+      <trans-unit id="tl_rateit.rateit.1">
+        <source>rateit</source>
+        <target>rateit</target>
+      </trans-unit>
       <trans-unit id="tl_rateit.clearratings">
         <source>Reset selected ratings</source>
         <target>Markierte Bewertungen zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="tl_rateit.apply">
+        <source>Apply</source>
+        <target>Anwenden</target>
       </trans-unit>
       <trans-unit id="tl_rateit_type_options.page">
         <source>Page</source>
