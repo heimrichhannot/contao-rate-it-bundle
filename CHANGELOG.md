@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.10] - 2023-06-05
+- Fixed: warnings
+- 
 ## [4.0.9] - 2023-04-27
 - Fixed: warnings
 

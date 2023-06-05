@@ -99,7 +99,7 @@ trait NewsRateItItemTrait
         $frontend = new RateItFrontend();
         $rating = $frontend->loadRating($ratingId, 'news');
 
-        return $rating['totalRating'];
+        return $rating['totalRating'] ?? 0;
     }
 
     public function getShowBefore()
