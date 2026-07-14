@@ -1,0 +1,19 @@
+{
+    "name": "contao-rate-it-bundle",
+    "version": "5.0.0",
+    "private": true,
+    "description": "Frontend assets (rating widget + skins) for the Contao RateIt bundle",
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/core": "^7.24.6",
+        "@babel/preset-env": "^7.24.6",
+        "@symfony/webpack-encore": "^4.6.1",
+        "css-loader": "^6.11.0",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4"
+    },
+    "scripts": {
+        "build-dev": "yarn encore dev",
+        "build-production": "yarn encore production"
+    }
+}

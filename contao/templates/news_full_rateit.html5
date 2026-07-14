@@ -1,0 +1,40 @@
+
+<?php if ($this->rateit_rating_before): ?>
+	<!-- indexer::stop -->
+	<?php $this->block('rating'); ?>
+	<div id="<?= $this->ratingId ?>" class="<?= $this->class ?> <?= $this->rateit_class ?> <?= $this->rateit_skin ?>">
+			<?php if ($this->showBefore) : ?>
+			<div id="<?= $this->descriptionId ?>" class="ratingText"><?= $this->description ?></div>
+			<?php endif; ?>
+			<div class="wrapper">
+					<div class="rateItRating-selected" style="display: block;"></div>
+					<div class="rateItRating-hover"></div>
+			</div>
+			<?php if ($this->showAfter) : ?>
+			<div id="<?= $this->descriptionId ?>" class="ratingText"><?= $this->description ?></div>
+			<?php endif; ?>
+	</div>
+	<?php $this->endblock(); ?>
+	<!-- indexer::continue -->
+<?php endif; ?>
+
+<?php $this->insert('news_full', $this->arrData); ?>
+
+<?php if ($this->rateit_rating_after): ?>
+	<!-- indexer::stop -->
+	<?php $this->block('rating'); ?>
+	<div id="<?= $this->ratingId ?>" class="<?= $this->class ?> <?= $this->rateit_class ?> <?= $this->rateit_skin ?>">
+			<?php if ($this->showBefore) : ?>
+			<div id="<?= $this->descriptionId ?>" class="ratingText"><?= $this->description ?></div>
+			<?php endif; ?>
+			<div class="wrapper">
+					<div class="rateItRating-selected" style="display: block;"></div>
+					<div class="rateItRating-hover"></div>
+			</div>
+			<?php if ($this->showAfter) : ?>
+			<div id="<?= $this->descriptionId ?>" class="ratingText"><?= $this->description ?></div>
+			<?php endif; ?>
+	</div>
+	<?php $this->endblock(); ?>
+	<!-- indexer::continue -->
+<?php endif; ?>

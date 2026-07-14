@@ -1,0 +1,20 @@
+{
+  "entrypoints": {
+    "contao-rate-it-bundle": {
+      "css": [
+        "/bundles/contaorateit/contao-rate-it-bundle.css"
+      ],
+      "js": [
+        "/bundles/contaorateit/contao-rate-it-bundle.js"
+      ]
+    },
+    "contao-rate-it-bundle-backend": {
+      "css": [
+        "/bundles/contaorateit/contao-rate-it-bundle-backend.css"
+      ],
+      "js": [
+        "/bundles/contaorateit/contao-rate-it-bundle-backend.js"
+      ]
+    }
+  }
+}

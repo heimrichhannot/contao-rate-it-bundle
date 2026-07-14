@@ -1,74 +1,67 @@
 {
-  "name": "heimrichhannot/contao-rate-it-bundle",
-  "description": "RateIt extension for the Contao Open Source CMS as contao 4 bundle",
-  "keywords": [
-    "contao",
-    "rating",
-    "rateit",
-    "bewertung",
-    "bundle"
-  ],
-  "type": "contao-bundle",
-  "homepage": "https://cgo-it.de",
-  "license": "LGPL-3.0-or-later",
-  "prefer-stable": true,
-  "config": {
-    "preferred-install": {
-      "cgo-it/*": "dist",
-      "*": "dist"
-    }
-  },
-  "authors": [
-    {
-      "name": "cgo IT",
-      "email": "info@cgo-it.de",
-      "homepage": "https://cgo-it.de",
-      "role": "Developer"
-    },
-    {
-      "name": "Heimrich & Hannot GmbH",
-      "homepage": "https://heimrich-hannot.de",
-      "role": "Developer"
-    }
-  ],
-  "support": {
-    "issues": "https://github.com/heimrichhannot/contao-rate-it-bundle/issues",
-    "source": "https://github.com/heimrichhannot/contao-rate-it-bundle.git"
-  },
-  "require": {
-    "php": "^7.4 || ^8.0",
-    "contao/core-bundle": "^4.9",
-    "cgo-it/contao-xls_export-bundle": "^4.0",
-    "heimrichhannot/contao-utils-bundle": "^2.99",
-    "symfony/framework-bundle": "^4.4 || ^5.4"
-  },
-  "require-dev": {
-    "contao/manager-plugin": "^2.0"
-  },
-  "conflict": {
-    "contao/core": "*",
-    "contao/manager-plugin": "<2.0 || >=3.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "HeimrichHannot\\RateItBundle\\": "src/"
-    },
-    "classmap": [
-      "src/Resources/contao/"
+    "name": "heimrichhannot/contao-rate-it-bundle",
+    "description": "RateIt extension for the Contao Open Source CMS (Contao 5 bundle)",
+    "keywords": [
+        "contao",
+        "rating",
+        "rateit",
+        "bewertung",
+        "bundle"
     ],
-    "exclude-from-classmap": [
-      "src/Resources/contao/config/",
-      "src/Resources/contao/dca/",
-      "src/Resources/contao/languages/",
-      "src/Resources/contao/templates/"
-    ]
-  },
-  "extra": {
-    "contao": {
-      "runonce": [
-        "src/Resources/contao/runonce/create-initial-data.php"
-      ]
+    "type": "contao-bundle",
+    "homepage": "https://github.com/heimrichhannot/contao-rate-it-bundle",
+    "license": "LGPL-3.0-or-later",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "cgo IT",
+            "email": "info@cgo-it.de",
+            "homepage": "https://cgo-it.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Heimrich & Hannot GmbH",
+            "email": "digitales@heimrich-hannot.de",
+            "homepage": "https://heimrich-hannot.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/heimrichhannot/contao-rate-it-bundle/issues",
+        "source": "https://github.com/heimrichhannot/contao-rate-it-bundle.git"
     },
-    "contao-manager-plugin": "HeimrichHannot\\RateItBundle\\ContaoManager\\Plugin"
-  }
+    "require": {
+        "php": "^8.1",
+        "contao/core-bundle": "^5.3",
+        "heimrichhannot/contao-encore-contracts": "^1.0",
+        "doctrine/dbal": "^3.6 || ^4.0",
+        "twig/twig": "^3.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/http-foundation": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/routing": "^6.4 || ^7.0",
+        "symfony/security-bundle": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.13"
+    },
+    "suggest": {
+        "contao/news-bundle": "To rate news items via the parseArticles hook."
+    },
+    "conflict": {
+        "contao/core": "*",
+        "contao/manager-plugin": "<2.13 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HeimrichHannot\\RateItBundle\\": "src/"
+        },
+        "classmap": [
+            "contrib/simple_html_dom.php"
+        ]
+    },
+    "extra": {
+        "contao-manager-plugin": "HeimrichHannot\\RateItBundle\\ContaoManager\\Plugin"
+    }
 }

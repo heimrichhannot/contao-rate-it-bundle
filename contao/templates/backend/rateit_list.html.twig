@@ -1,0 +1,105 @@
+{#
+    Backend "RateIt" module – ratings list.
+    Rendered by HeimrichHannot\RateItBundle\Controller\BackendModule\RateItBackendModule.
+#}
+<div class="mod_rateit">
+    <form action="{{ formAction }}" id="rateit_editform" method="post">
+        <div class="tl_formbody">
+            <input type="hidden" name="rateit_action" value="list">
+            <input type="hidden" name="REQUEST_TOKEN" value="{{ requestToken }}">
+
+            <div class="tl_panel">
+                <div class="tl_filter tl_subpanel">
+                    <strong>{{ msc.filter|default('Filter') }}:</strong>
+                    <select name="rateit_typ" class="tl_select{{ filter.typ ? ' active' }}">
+                        <option value="">{{ text.seltyp[0]|default('Type') }}</option>
+                        <option value="">---</option>
+                        {% for key, label in typeOptions %}
+                            <option value="{{ key }}"{{ filter.typ == key ? ' selected' }}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="rateit_active" class="tl_select{{ filter.active ? ' active' }}">
+                        <option value="">{{ text.selactive[0]|default('Status') }}</option>
+                        <option value="">---</option>
+                        {% for key, label in activeOptions %}
+                            <option value="{{ key }}"{{ filter.active == key ? ' selected' }}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="tl_panel">
+                <div class="tl_submit_panel tl_subpanel">
+                    <button type="submit" name="filter" class="tl_submit">{{ text.apply|default('Apply') }}</button>
+                </div>
+                <div class="tl_search tl_subpanel">
+                    <strong>{{ msc.search|default('Search') }}:</strong>
+                    <input type="text" name="rateit_find" value="{{ filter.find }}" class="tl_text{{ filter.find ? ' active' }}">
+                </div>
+                <div class="tl_sorting tl_subpanel">
+                    <strong>{{ msc.sortBy|default('Order by') }}:</strong>
+                    <select name="rateit_order" class="tl_select">
+                        {% for key, label in orderOptions %}
+                            <option value="{{ key }}"{{ filter.order == key ? ' selected' }}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div id="tl_buttons">
+                <a href="{{ exportLink }}" class="header_export_excel" title="CSV-Export">CSV-Export</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="rating_container">
+        <form action="{{ formAction }}" id="rateit_clearform" method="post">
+            <input type="hidden" name="act" value="reset_ratings">
+            <input type="hidden" name="REQUEST_TOKEN" value="{{ requestToken }}">
+
+            {% if items is empty %}
+                <p>{{ text.noratingsfound|default('No ratings found.') }}</p>
+            {% else %}
+                {% for rating in items %}
+                    <table class="rating">
+                        <tr class="title">
+                            <th colspan="4">
+                                <input type="checkbox" name="selectedids[]" value="{{ rating.rkey }}__{{ rating.typ }}">&nbsp;
+                                <a href="{{ rating.viewLink }}" title="{{ text.showdetails|default('Details') }}">{{ rating.title }}</a>
+                            </th>
+                        </tr>
+                        <tr class="info">
+                            <th>{{ text.title[0]|default('Title') }}</th>
+                            <td>{{ rating.title }}</td>
+                            <th>{{ text.typ[0]|default('Type') }}</th>
+                            <td>{{ typeOptions[rating.typ]|default(rating.typ) }}</td>
+                        </tr>
+                        <tr class="info">
+                            <th>{{ text.createdat[0]|default('Created') }}</th>
+                            <td>{{ rating.createdat ? rating.createdat|date('d.m.Y') : '' }}</td>
+                            <th>{{ text.status[0]|default('Status') }}</th>
+                            <td>{{ activeOptions[rating.active]|default(rating.active) }}</td>
+                        </tr>
+                        <tr class="info">
+                            <th>{{ text.rateit[0]|default('Rating') }}</th>
+                            <td class="nowrap">
+                                <div class="ratebarframe"><div class="ratebar" style="width:{{ rating.percent }}%"></div></div>
+                                <div class="ratebartext">{{ rating.rating|replace({'.': ','}) }} / {{ rating.stars }} ({{ rating.totalRatings }})</div>
+                            </td>
+                            <th>&nbsp;</th>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                {% endfor %}
+
+                <div class="tl_formbody_submit">
+                    <div class="tl_submit_container">
+                        <button type="submit" class="tl_submit">{{ text.clearratings|default('Reset selected ratings') }}</button>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</div>

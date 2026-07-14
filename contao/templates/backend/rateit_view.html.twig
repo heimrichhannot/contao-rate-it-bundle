@@ -1,0 +1,87 @@
+{#
+    Backend "RateIt" module – single rating detail view.
+    Rendered by HeimrichHannot\RateItBundle\Controller\BackendModule\RateItBackendModule.
+#}
+<div class="mod_rateit mod_rateit_view">
+    <div id="tl_buttons">
+        <a href="{{ exportLink }}" class="header_export_excel" title="CSV-Export">CSV-Export</a>
+        <a href="{{ backLink }}" class="header_back" title="{{ text.goback|default('Back') }}">{{ text.goback|default('Back') }}</a>
+    </div>
+
+    <div class="rating_container">
+        <table class="rating">
+            <tr class="title"><th colspan="4">{{ item.title }}</th></tr>
+            <tr>
+                <th>{{ text.title[0]|default('Title') }}</th>
+                <td>{{ item.title }}</td>
+                <th>{{ text.typ[0]|default('Type') }}</th>
+                <td>{{ typeOptions[item.typ]|default(item.typ) }}</td>
+            </tr>
+            <tr>
+                <th>{{ text.createdat[0]|default('Created') }}</th>
+                <td>{{ item.createdat ? item.createdat|date('d.m.Y') : '' }}</td>
+                <th>{{ text.status[0]|default('Status') }}</th>
+                <td>{{ activeOptions[item.active]|default(item.active) }}</td>
+            </tr>
+            <tr>
+                <th>{{ text.overall_rating[0]|default('Overall rating') }}</th>
+                <td class="nowrap">
+                    <div class="ratebarframe"><div class="ratebar" style="width:{{ item.percent }}%"></div></div>
+                    <div class="ratebartext">{{ item.rating|replace({'.': ','}) }} / {{ item.stars }} ({{ item.totalRatings }})</div>
+                </td>
+                <th>&nbsp;</th>
+                <td>&nbsp;</td>
+            </tr>
+
+            <tr><th colspan="4">{{ text.statistics[0]|default('Statistics') }}</th></tr>
+            <tr>
+                <td colspan="4">
+                    {% if distribution is empty %}
+                        <p>{{ text.noratingsfound|default('No ratings found.') }}</p>
+                    {% else %}
+                        <table class="rating rateit-distribution">
+                            {% for row in distribution %}
+                                <tr>
+                                    <th style="white-space:nowrap">{{ row.stars|replace({'.': ','}) }} / {{ item.stars }}</th>
+                                    <td style="width:100%">
+                                        <div class="ratebarframe"><div class="ratebar" style="width:{{ row.width }}%"></div></div>
+                                    </td>
+                                    <td class="nowrap">{{ row.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr><th colspan="4">{{ text.ratings[0]|default('Ratings') }}</th></tr>
+            <tr>
+                <td colspan="4">
+                    {% if ratings is empty %}
+                        <p>{{ text.noratingsfound|default('No ratings found.') }}</p>
+                    {% else %}
+                        <table class="rating">
+                            <tr>
+                                <th>{{ text.ip[0]|default('IP') }}</th>
+                                <th>{{ text.member[0]|default('Member') }}</th>
+                                <th>{{ text.rating[0]|default('Rating') }}</th>
+                                <th>{{ text.createdatdetail[0]|default('Date') }}</th>
+                            </tr>
+                            {% for r in ratings %}
+                                <tr>
+                                    <td>{{ r.ip }}</td>
+                                    <td>{{ r.member|trim }}</td>
+                                    <td>
+                                        <div class="ratebarframe"><div class="ratebar" style="width:{{ r.percent }}%"></div></div>
+                                        <div class="ratebartext">{{ r.rating|replace({'.': ','}) }} / {{ item.stars }}</div>
+                                    </td>
+                                    <td>{{ r.createdat ? r.createdat|date('d.m.Y H:i') : '' }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{#
+    RateIt rating widget.
+
+    Rendered by the rateit_rating() Twig function, the RateIt content element /
+    frontend module and the page/faq hooks. Available variables:
+      ratingId, descriptionId, description, rateit_class, skin,
+      showBefore, showAfter, itemreviewed, actRating, maxRating, votes
+#}
+<!-- indexer::stop -->
+<div id="{{ ratingId }}" class="{{ rateit_class }} {{ skin }} block">
+    {% if showBefore %}
+        <div id="{{ descriptionId }}" class="ratingText">{{ description }}</div>
+    {% endif %}
+    <div class="wrapper">
+        <div class="rateItRating-selected" style="display: block;"></div>
+        <div class="rateItRating-hover"></div>
+    </div>
+    {% if showAfter %}
+        <div id="{{ descriptionId }}" class="ratingText">{{ description }}</div>
+    {% endif %}
+</div>
+<!-- indexer::continue -->

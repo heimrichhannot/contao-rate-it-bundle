@@ -1,0 +1,20 @@
+/*
+ * "Star" rating skin. Scoped to the `.rateit-stars` modifier class so the star
+ * and heart skins can live in the same webpack bundle and be switched via the
+ * rating type configured in the Contao settings. The Twig templates add the
+ * `rateit-stars` / `rateit-hearts` class to the rating element accordingly.
+ */
+.rateItRating.rateit-stars .wrapper,
+.mbrateItRating.rateit-stars .wrapper {
+    background: url("../images/star.gif");
+}
+
+.rateItRating.rateit-stars div.rateItRating-hover,
+.mbrateItRating.rateit-stars div.rateItRating-hover {
+    background: url("../images/star.gif") left;
+}
+
+.rateItRating.rateit-stars div.rateItRating-selected,
+.mbrateItRating.rateit-stars div.rateItRating-selected {
+    background: url("../images/star.gif") left;
+}

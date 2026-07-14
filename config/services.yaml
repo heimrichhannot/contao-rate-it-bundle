@@ -1,0 +1,18 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $projectDir: '%kernel.project_dir%'
+
+    HeimrichHannot\RateItBundle\:
+        resource: '../src/'
+        exclude:
+            - '../src/ContaoRateItBundle.php'
+            - '../src/DependencyInjection/'
+            - '../src/Controller/BackendModule/'
+
+    # Make the data layer available as a public service so it can also be used
+    # from legacy contexts (e.g. custom templates or the ajax endpoint).
+    HeimrichHannot\RateItBundle\Service\RatingManager:
+        public: true

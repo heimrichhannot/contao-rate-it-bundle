@@ -1,0 +1,34 @@
+{#
+    "Top ratings" frontend module (best / most rated items).
+    Rendered by RateItTopRatingsModuleController.
+#}
+<div class="{{ elementClass }} block"{% if elementId %} id="{{ elementId }}"{% endif %}>
+    {% if headlineText %}
+        <{{ headlineTag }}>{{ headlineText }}</{{ headlineTag }}>
+    {% endif %}
+
+    <ul>
+        {% for rating in arrRatings %}
+            <li>
+                <!-- indexer::stop -->
+                <div class="rateItContainer">
+                    <div class="rateItTitle">
+                        {% if rating.url %}
+                            <a href="{{ rating.url }}">{{ rating.title }}</a>
+                        {% else %}
+                            {{ rating.title }}
+                        {% endif %}
+                    </div>
+                    <div id="{{ rating.rateItID }}" class="{{ rating.rateit_class }} {{ rating.skin }}" rel="{{ rating.rel }}">
+                        <div class="wrapper">
+                            <div class="rateItRating-selected" style="display: block;"></div>
+                            <div class="rateItRating-hover"></div>
+                        </div>
+                        <div id="{{ rating.descriptionId }}" class="ratingText">{{ rating.description }}</div>
+                    </div>
+                </div>
+                <!-- indexer::continue -->
+            </li>
+        {% endfor %}
+    </ul>
+</div>

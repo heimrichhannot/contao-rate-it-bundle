@@ -1,0 +1,3 @@
+rateit_ajax:
+    resource: ../src/Controller/AjaxRateItController.php
+    type: attribute
